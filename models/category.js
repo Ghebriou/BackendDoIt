@@ -4,7 +4,8 @@ const CategorySchema = new mongoose.Schema({
     name: { type: String, required: true, unique: true },
     user:{
         type: mongoose.Schema.Types.ObjectId,
-        ref:'user'
+        ref:'user', 
+        required : true
     }
 });
 

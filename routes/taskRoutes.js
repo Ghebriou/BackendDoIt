@@ -24,7 +24,7 @@ router.post('/',userAuth, async (req, res) => {
       if (!user) throw new Error("user not found and you are not allowed");
 
        const task = new Task(req.body);
-       task.user = user._id;
+       task.user = user.user_id;
        await task.save();
        res.status(200).json({ message: ' added successfully', task });
     } catch (err) {

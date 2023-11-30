@@ -19,7 +19,7 @@ router.post("/categories",userAuth, async (req, res) => {
    if (!user) throw new Error("user not found and you are not allowed");
 
     const newCategory = new Category(req.body);
-    newCategory.user = user._id;
+    newCategory.user = user.user_id;
     await newCategory.save();
     res.status(200).json({ message: " added successfully", newCategory });
   } catch (err) {

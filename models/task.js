@@ -7,8 +7,14 @@ const taskSchema = new mongoose.Schema(  {
     description : { type : String , required: false},
     category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category' }, 
-    done : { type : Boolean , default: false}
+        ref: 'Category',
+        required: true  }, 
+    done : { type : Boolean , default: false},
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'user', 
+        required : true
+    }
 
 },
 {

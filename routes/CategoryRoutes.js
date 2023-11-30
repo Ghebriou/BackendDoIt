@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Category = require("../models/category");
+const userAuth = require("../middleware/userAuth");
 
-router.get("/categories", async (req, res) => {
+router.get("/categories",userAuth, async (req, res) => {
   try {
     const categories = await Category.find({ user: req.user.user_id }); 
     res.status(200).json(categories);
@@ -11,10 +12,10 @@ router.get("/categories", async (req, res) => {
   }
 });
 
-router.post("/categories", async (req, res) => {
+router.post("/categories",userAuth, async (req, res) => {
   try {
     const user = req.user;
-    // console.log(user)
+    //  console.log(user);
    if (!user) throw new Error("user not found and you are not allowed");
 
     const newCategory = new Category(req.body);

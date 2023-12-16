@@ -27,4 +27,14 @@ router.post("/categories",userAuth, async (req, res) => {
   }
 });
 
+router.delete("/categories/:id", userAuth, async (req, res) => {
+  try {
+    await Category.findByIdAndDelete(req.params.id);
+    res.status(204).end();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 module.exports = router;

@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+ 
 
 // locals
 const port = 3000;
@@ -12,7 +13,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Connect to MongoDB database
@@ -23,6 +24,16 @@ mongoose
 .catch((err)=>{
    console.log(err)
 })
+
+const fs = require('fs');
+const profilePictureUploadsDir = './uploads/profile_pictures';
+app.use('/uploads/profile_pictures', express.static('uploads/profile_pictures'));
+
+// Create directory if it doesn't exist
+if (!fs.existsSync(profilePictureUploadsDir)) {
+  fs.mkdirSync(profilePictureUploadsDir, { recursive: true });
+}
+   
 
 // route middlwares
 app.use('/tasks',tasksRoutes);

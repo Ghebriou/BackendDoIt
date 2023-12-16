@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 const taskSchema = new mongoose.Schema(  {
     name : { type : String , required: true},
-    date : { type : String , required: false},
-    time : { type : String,timezone: true, default: () => { return new Date().toISOString();},required: false},
+    date : { type : String , required: true},
+    time : { type : String,timezone: true, default: () => { return new Date().toISOString();},required: true},
     description : { type : String , required: false},
     category: {
         type: mongoose.Schema.Types.ObjectId,
